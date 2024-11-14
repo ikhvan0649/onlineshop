@@ -1,24 +1,20 @@
 # app/models.py
-from . import db
+from app import db
 
 class User(db.Model):
-    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(120))
+    email = db.Column(db.String(120), unique=True)
+    orders = db.relationship("Order", backref="user", lazy=True)
 
 class Product(db.Model):
-    __tablename__ = "products"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    name = db.Column(db.String(120))
+    price = db.Column(db.Float)
+    orders = db.relationship("Order", backref="product", lazy=True)
 
 class Order(db.Model):
-    __tablename__ = "orders"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    
-    user = db.relationship("User", backref="orders")
-    product = db.relationship("Product", backref="orders")
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer)

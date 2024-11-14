@@ -1,6 +1,6 @@
 # app/schemas.py
-from . import ma
-from .models import User, Product, Order
+from app import ma
+from app.models import User, Product, Order
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:

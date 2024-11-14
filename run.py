@@ -1,4 +1,9 @@
-# run.py
+import sys
+from pathlib import Path
+
+# Menambahkan direktori utama ke PYTHONPATH
+sys.path.append(str(Path(__file__).resolve().parent))
+
 from app import create_app, db
 
 app = create_app()

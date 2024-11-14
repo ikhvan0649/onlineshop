@@ -1,8 +1,8 @@
 # app/views.py
 from flask import Blueprint, request, jsonify
-from . import db
-from .models import User, Product, Order
-from .schemas import UserSchema, ProductSchema, OrderSchema
+from app import db
+from app.models import User, Product, Order
+from app.schemas import UserSchema, ProductSchema, OrderSchema
 
 main = Blueprint("main", __name__)
 
